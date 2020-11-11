@@ -60,6 +60,12 @@ func NewTermRenderer(options ...TermRendererOption) (*TermRenderer, error) {
 	tr := &TermRenderer{
 		md: goldmark.New(
 			goldmark.WithExtensions(
+				extension.NewLinkify(
+					extension.WithLinkifyAllowedProtocols([][]byte{
+						[]byte("http:"),
+						[]byte("https:"),
+						[]byte("gemini:"),
+					})),
 				extension.GFM,
 				extension.DefinitionList,
 			),
